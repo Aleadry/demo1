@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="helloWorld" class="cn.com.taiji.po.HelloWorld">
+		<property name="name" value="小红"></property>
+	</bean>
+	<bean id="sayHello" class="cn.com.taiji.po.SayHello">
+		<property name="age" value="15"></property>
+	</bean>
+	<bean id="hello" class="cn.com.taiji.po.Hello">
+		<constructor-arg>
+			<ref bean="helloWorld" />
+		</constructor-arg>
+		<constructor-arg ref="sayHello"></constructor-arg>
+		<property name="helloAge">
+			<ref bean="sayHello" />
+		</property>
+		<property name="helloName">
+			<ref bean="helloWorld" />
+		</property>
+	</bean>
+</beans>
