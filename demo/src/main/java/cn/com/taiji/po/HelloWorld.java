@@ -16,5 +16,11 @@ public class HelloWorld {
 	public String toString() {
 		return "HelloWorld [name=" + name + "]";
 	}
+	public void start() {
+		System.out.println("1111111111");
+	}
 	
+	public void destory() {
+		System.out.println("2222222222");
+	}
 }

@@ -3,7 +3,6 @@ package cn.com.taiji.control;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import cn.com.taiji.po.HelloWorld;
 
 public class MainControl {
 
@@ -16,8 +15,7 @@ public class MainControl {
 			System.out.println(name);
 			System.out.println(context.containsBeanDefinition(name));
 		};
+		
 	}
-	public void start() {
-		System.out.println("1111111111");
-	}
+	
 }
