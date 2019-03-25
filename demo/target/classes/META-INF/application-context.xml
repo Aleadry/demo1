@@ -3,8 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<bean id="helloWorld" class="cn.com.taiji.po.HelloWorld">
+	<bean id="helloWorld" class="cn.com.taiji.po.HelloWorld" init-method="start" destroy-method="destory">
 		<property name="name" value="小红"></property>
+		
 	</bean>
 	<bean id="sayHello" class="cn.com.taiji.po.SayHello">
 		<property name="age" value="15"></property>
@@ -21,4 +22,5 @@
 			<ref bean="helloWorld" />
 		</property>
 	</bean>
+	
 </beans>
