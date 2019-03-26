@@ -6,7 +6,22 @@ my:
   max: ${random.int(10)}
   value: ${random.value}
   
-server:
-  port: 8989 
 
+management:
+  security:
+      enabled: true
+  port: 8888
+  context-path: /abc
+    
+security:
+  user:
+    name: admin
+    password: 123456
 
+endpoints:
+  actuator:
+    enabled: true
+  shutdown:
+    enabled: true
+    
+    

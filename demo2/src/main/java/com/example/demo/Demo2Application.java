@@ -2,6 +2,8 @@ package com.example.demo;
 
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,10 +14,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.context.support.ServletRequestHandledEvent;
 
+
 @SpringBootApplication
 @ComponentScan(basePackages="com.example")
 public class Demo2Application {
 
+	private static final Logger logger=LoggerFactory.getLogger(Demo2Application.class);
 	public static void main(String[] args) {	
 		SpringApplication.run(Demo2Application.class, args);
 		
@@ -27,20 +31,21 @@ public class Demo2Application {
 			@Override
 			public void run(String... args) throws Exception {
 				// TODO Auto-generated method stub
-				System.out.println("The System runner start to init ......");
+				logger.info("The System runner start to init ......");
 				
 			}
 		};
 		return runner;
 	}
+	
 	@Bean
 	public ApplicationRunner appRunner() {
 		return args->{
-			System.out.println("--Application Runner--");
+			logger.info("--Application Runner--");
 			for(String opt:args.getOptionNames()) {
-				System.out.print(opt);
-				System.out.print("->");
-				System.out.println(args.getOptionValues(opt).stream().collect(Collectors.joining(",",",","]")));
+				logger.info(opt);
+				logger.info("->");
+				logger.info(args.getOptionValues(opt).stream().collect(Collectors.joining(",",",","]")));
 			}
 		};
 	}
@@ -51,7 +56,7 @@ public class Demo2Application {
 			if(even instanceof ServletRequestHandledEvent) {
 				ServletRequestHandledEvent e=(ServletRequestHandledEvent) even;
 				if(e.getRequestUrl().equals(hello_URL)) {
-					System.out.println("visit hello");
+					logger.info("visit hello");
 				}
 			}
 		};
