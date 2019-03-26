@@ -14,9 +14,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.context.support.ServletRequestHandledEvent;
 
+import de.codecentric.boot.admin.config.EnableAdminServer;
+
+
 
 @SpringBootApplication
 @ComponentScan(basePackages="com.example")
+@EnableAdminServer
 public class Demo2Application {
 
 	private static final Logger logger=LoggerFactory.getLogger(Demo2Application.class);
