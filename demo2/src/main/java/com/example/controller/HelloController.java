@@ -1,5 +1,9 @@
 package com.example.controller;
 
+import javax.annotation.PostConstruct;
+
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +24,16 @@ public class HelloController {
 	private String value;
 	@Autowired
 	private ConfigBean conFig;
+	private static final Logger logger=LoggerFactory.getLogger(HelloController.class);
 
+	@PostConstruct
+	public void logSomething() {
+		logger.debug("Sample Debug Message");
+		logger.info("Sample Info Message");
+		logger.trace("Sample Trace Message");
+		logger.error("Sample Error Message");
+		logger.warn("Sample Warn Message");
+	} 
 	@RequestMapping("/hello")
 	public String stat() {
 		return "Hello World"+","+jak+","+age+","+number+","+value;
