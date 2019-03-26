@@ -1,0 +1,4 @@
+3-22日：Spring XML配置方式、注解配置方式和Java配置方式的使用的使用:在XML里配置实体类的Bean通过<property name="" value="">给属性赋值，<constructor-arg><ref bean="" /></constructor-arg>
+和<property name=""><ref bean="" /></property>在给实体类间添加关联 java配置方式就是工厂模式
+3-25日：3种启动方式IDE、java -jar和mvn。Spring的application的激活和属性的调用 配置优先级
+3-26日：spring boot 日志，spring boot监控 spring的安全保护
