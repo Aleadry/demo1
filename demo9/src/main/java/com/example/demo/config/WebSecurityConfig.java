@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
@@ -30,13 +31,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	@Autowired
 	private DataSource dataSource;
+	@Autowired
+	private CustomAuthenticationProvider CustomAuthenticationProvider;
+	
 	protected void configure(HttpSecurity http) throws Exception {
+		http.antMatcher("/**").authorizeRequests()
+		.antMatchers("/h2-console/**")
+        .permitAll()
+        .anyRequest().access("@customAccessControlService.canAccess(request,authentication)");
+		
 		http
-		.authorizeRequests()
-			.antMatchers("/admin").hasRole("ADMIN")
-			.antMatchers("/user").hasRole("USER")
-			.anyRequest().authenticated()
-			.and()
+//		.authorizeRequests()
+//			.antMatchers("/admin").hasRole("ADMIN")
+//			.antMatchers("/user").hasRole("USER")
+//			.anyRequest().authenticated()
+//			.and()
 		.formLogin()
 			.loginPage("/login")
 			.successForwardUrl("/a")
@@ -62,7 +71,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				}
 			})
 			.deleteCookies("aaaaaaaa")
-			.invalidateHttpSession(true);
+			.invalidateHttpSession(true)
+			.and();
+		
+		
+		
 	}
 
 	@Override
@@ -74,10 +87,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .and().withUser("4").password("4").roles( "ADMIN", "DBA");*/
 		auth
 		.jdbcAuthentication()
-			.dataSource(dataSource);
+		.dataSource(dataSource);
+		
+		auth.authenticationProvider(CustomAuthenticationProvider);
+		
 //			.withDefaultSchema()
 //			.withUser("1").password("1").roles("USER").and()
 //			.withUser("2").password("2").roles("USER", "ADMIN");
 	}
+
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		// TODO Auto-generated method stub
+		web.ignoring().antMatchers("/favicon.ico", "/css/**", "/js/**", "image/**");
+	}
+	
 
 }

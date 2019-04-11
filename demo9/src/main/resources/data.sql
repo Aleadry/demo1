@@ -9,3 +9,7 @@ insert into authorities(username,authority) values('1','role_user');
 insert into authorities(username,authority) values('2','role_admin');
 insert into authorities(username,authority) values('3','read');
 insert into authorities(username,authority) values('4','read');
+
+insert into permissions(authority, url) values('role_user','/');
+insert into permissions(authority, url) values('role_admin','/admin');
+insert into permissions(authority, url) values('role_admin','/user');
